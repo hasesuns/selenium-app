@@ -1,4 +1,6 @@
+import sys
 from collections import defaultdict
+from datetime import datetime
 from logging import getLogger
 from pathlib import Path
 from time import sleep
@@ -22,10 +24,10 @@ class SubmittedCodesDownloader:
         self,
         atcoder_user_id: str,
         output_dir: str = "./submitted",
-        first_epoch_second: int = 1300000000,
+        first_submit_year: int = 2016,
     ):
         self.atcoder_user_id = atcoder_user_id
-        self.first_epoch_second = first_epoch_second
+        self.first_epoch_second = int(datetime(first_submit_year, 1, 1).timestamp())
         self.output_dir = output_dir
 
         options = webdriver.ChromeOptions()
@@ -181,7 +183,12 @@ class SubmittedCodesDownloader:
 
 
 if __name__ == "__main__":
+    """
+    sys.argv[1] (str): AtCoder User name
+    sys.argv[2] (str): Output Dirctory path
+    sys.argv[3] (int): First Submit Year
+    """
     logger.info("start!")
-    downloder = SubmittedCodesDownloader("hasesuns", "../atcoder/submitted", 1551011671)
+    downloder = SubmittedCodesDownloader(sys.argv[1], sys.argv[2], int(sys.argv[3]))
     downloder.exec_download()
     logger.info("finish!")
