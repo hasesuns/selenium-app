@@ -4,7 +4,7 @@ Crawling and scraping using Selenium.
 
 ## How to use
 
-### ATCoderSubmittedCodesDownloader
+### AtCoderSubmittedCodesDownloader
 
 ```
 $ python src/atcoder/submitted_codes_downloader.py ATCODER_USER_NAME OUTPUT_DIR FIRST_SUBMIT_YEAR
