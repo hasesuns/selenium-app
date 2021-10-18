@@ -20,9 +20,9 @@ class SubmittedCodesDownloader:
 
     def __init__(
         self,
-        atcoder_user_id,
-        output_dir="./submitted",
-        first_epoch_second="1300000000",
+        atcoder_user_id: str,
+        output_dir: str = "./submitted",
+        first_epoch_second: int = 1300000000,
     ):
         self.atcoder_user_id = atcoder_user_id
         self.first_epoch_second = first_epoch_second
@@ -111,8 +111,7 @@ class SubmittedCodesDownloader:
 
         return info_by_contest
 
-    def _get_output_file_path(
-        self, submission_info_by_problem: Dict) -> Path:
+    def _get_output_file_path(self, submission_info_by_problem: Dict) -> Path:
         problem_id = submission_info_by_problem["problem_id"]
         file_name = problem_id.split("_")[-1]
 
@@ -125,7 +124,7 @@ class SubmittedCodesDownloader:
         )
         return output_path
 
-    def _get_submitted_code(self, code_url):
+    def _get_submitted_code(self, code_url: str):
         try:
             self.driver.get(code_url)
             wait = WebDriverWait(self.driver, 20)
@@ -145,7 +144,7 @@ class SubmittedCodesDownloader:
 
     def exec_download(
         self,
-        overwrite=False,
+        overwrite: bool = False,
     ):
         """exec donwloading
 
@@ -164,10 +163,7 @@ class SubmittedCodesDownloader:
             Path(f"{self.output_dir}/{contest_name}").mkdir(exist_ok=True, parents=True)
 
             for problem_submission_info in contest_submission_info:
-
-                output_file_path = self._get_output_file_path(
-                    problem_submission_info, self.output_dir
-                )
+                output_file_path = self._get_output_file_path(problem_submission_info)
                 if output_file_path.exists() and not overwrite:
                     continue
 
@@ -186,8 +182,6 @@ class SubmittedCodesDownloader:
 
 if __name__ == "__main__":
     logger.info("start!")
-    downloder = SubmittedCodesDownloader(
-        "hasesuns", "../atcoder/submitted", "1551011671"
-    )
+    downloder = SubmittedCodesDownloader("hasesuns", "../atcoder/submitted", 1551011671)
     downloder.exec_download()
     logger.info("finish!")
