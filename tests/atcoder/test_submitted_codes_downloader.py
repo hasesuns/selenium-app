@@ -9,7 +9,7 @@ logger = getLogger(__name__)
 
 @pytest.mark.github_actions
 def test_init_long_contest_number_dict():
-    downloder = SubmittedCodesDownloader("USERNAME", "OUTPUT_DIR", "FIRST_EPOCH_SECOND")
+    downloder = SubmittedCodesDownloader("USERNAME", "OUTPUT_DIR", 2021)
 
     assert downloder.problem_id_to_number_dict["a"] == 1
     assert downloder.problem_id_to_number_dict["z"] == 26
@@ -19,7 +19,7 @@ def test_init_long_contest_number_dict():
 
 @pytest.mark.github_actions
 def test_get_output_file_path():
-    downloder = SubmittedCodesDownloader("USERNAME", "OUTPUT_DIR", "FIRST_EPOCH_SECOND")
+    downloder = SubmittedCodesDownloader("USERNAME", "OUTPUT_DIR", 2021)
 
     submission_info_by_problem = {
         "contest_id": "sample_contest",
@@ -33,7 +33,7 @@ def test_get_output_file_path():
 
 @pytest.mark.github_actions
 def test_get_submission_url():
-    downloder = SubmittedCodesDownloader("USERNAME", "OUTPUT_DIR", "FIRST_EPOCH_SECOND")
+    downloder = SubmittedCodesDownloader("USERNAME", "OUTPUT_DIR", 2021)
     submission_info_by_problem = {
         "contest_id": "sample_contest",
         "problem_id": "sample_sample_x",
