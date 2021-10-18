@@ -1,0 +1,76 @@
+name: Python package CI
+
+on: push
+
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9]
+    env:
+      APP_PATH: ./src
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install poetry
+        poetry config virtualenvs.create false && poetry install
+
+    - name: Check with black
+      id: black_check
+      run: |
+        black --check $APP_PATH
+      continue-on-error: true
+
+    - name: If needed, format with black
+      if: steps.black_check.outcome != 'success'  # Check with blackが失敗したときだけ実行する
+      run: |
+        black $APP_PATH
+        git add $APP_PATH
+        git add $RUNNER_PATH
+        git config --global user.name github-actions
+        git config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'
+        git commit -m "Format Python code with psf/black push"
+        git push --force origin HEAD:$GITHUB_REF
+
+    - name: Check with isort
+      id: isort_check
+      run: |
+        isort --check-only $APP_PATH
+      continue-on-error: true
+
+    - name: If needed, format with isort
+      if: steps.isort_check.outcome != 'success'  # Check with isortが失敗したときだけ実行する
+      run: |
+        isort $APP_PATH
+        git add $APP_PATH
+        git config --global user.name github-actions
+        git config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'
+        git commit -m "Format Python code with pycqa/isort push"
+        git push --force origin HEAD:$GITHUB_REF
+
+    - name: Check with mypy
+      run: |
+        mypy --ignore-missing-imports $APP_PATH
+
+    - name: Lint with flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 --count --select=E9,F63,F7,F82 --show-source --statistics $APP_PATH
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide. E203,W503,W504 are conflicted with black
+        flake8 --count --ignore=E203,W503,W504 --exit-zero --max-complexity=10 --max-line-length=127 --statistics $APP_PATH
+
+    - name: Test with pytest
+      run: |
+        pytest -v -m github_actions
+  
