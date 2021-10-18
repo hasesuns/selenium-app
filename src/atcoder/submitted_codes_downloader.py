@@ -132,7 +132,10 @@ class SubmittedCodesDownloader:
             wait = WebDriverWait(self.driver, 20)
             wait.until(EC.presence_of_element_located((By.ID, "submission-code")))
             code = self.driver.find_element(by=By.ID, value="submission-code")
-            code_text = code.get_attribute("innerText")
+            code_text = code.get_attribute("innerText").replace(
+                " \n", "\n"
+            )  # remove not written space
+
         except TimeoutException as e:
             logger.error(e)
 
