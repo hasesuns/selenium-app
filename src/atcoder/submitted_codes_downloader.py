@@ -111,8 +111,7 @@ class SubmittedCodesDownloader:
 
         return info_by_contest
 
-    def _get_output_file_path(
-        self, submission_info_by_problem: Dict) -> Path:
+    def _get_output_file_path(self, submission_info_by_problem: Dict) -> Path:
         problem_id = submission_info_by_problem["problem_id"]
         file_name = problem_id.split("_")[-1]
 
