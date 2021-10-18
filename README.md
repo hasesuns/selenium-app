@@ -5,5 +5,5 @@ Crawling and scraping using Selenium.
 ## How to use
 
 ```
-$ python src/{FILENAME}.py
+$ python src/{DIR_NAME}/{FILE_NAME}.py
 ```
