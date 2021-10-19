@@ -86,7 +86,7 @@ class SubmittedCodesDownloader:
 
             except requests.exceptions.RequestException as e:
                 logger.error(e)
-        
+
             # "Please sleep for more than 1 second between accesses."
             # https://github.com/kenkoooo/AtCoderProblems/blob/master/doc/api.md#caution
             sleep(2)
