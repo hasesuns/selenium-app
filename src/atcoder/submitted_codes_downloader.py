@@ -87,6 +87,10 @@ class SubmittedCodesDownloader:
             except requests.exceptions.RequestException as e:
                 logger.error(e)
 
+            # "Please sleep for more than 1 second between accesses."
+            # https://github.com/kenkoooo/AtCoderProblems/blob/master/doc/api.md#caution
+            sleep(2)
+
         return submissions_info
 
     def _organize_submissions_info_by_contest(self, submissions_info: List) -> Dict:
@@ -151,7 +155,7 @@ class SubmittedCodesDownloader:
         self,
         overwrite: bool = False,
     ):
-        """exec donwloading
+        """exec donwload
 
         Args:
             overwrite (bool, optional): Overwrite local saved data or not. Defaults to False.
@@ -178,9 +182,7 @@ class SubmittedCodesDownloader:
                 with open(output_file_path, "w") as f:
                     f.write(code_text)
 
-                # "Please sleep for more than 1 second between accesses."
-                # https://github.com/kenkoooo/AtCoderProblems/blob/master/doc/api.md#caution
-                sleep(1.5)
+                sleep(2)
 
         self.driver.quit()
 
@@ -188,7 +190,7 @@ class SubmittedCodesDownloader:
 if __name__ == "__main__":
     """
     sys.argv[1] (str): AtCoder User name
-    sys.argv[2] (str): Output Dirctory path
+    sys.argv[2] (str): Output Dirctory Path
     sys.argv[3] (int): First Submit Year
     """
     logger.info("start!")
