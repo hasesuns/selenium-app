@@ -155,7 +155,7 @@ class SubmittedCodesDownloader:
         self,
         overwrite: bool = False,
     ):
-        """exec donwloading
+        """exec donwload
 
         Args:
             overwrite (bool, optional): Overwrite local saved data or not. Defaults to False.
@@ -190,7 +190,7 @@ class SubmittedCodesDownloader:
 if __name__ == "__main__":
     """
     sys.argv[1] (str): AtCoder User name
-    sys.argv[2] (str): Output Dirctory path
+    sys.argv[2] (str): Output Dirctory Path
     sys.argv[3] (int): First Submit Year
     """
     logger.info("start!")
