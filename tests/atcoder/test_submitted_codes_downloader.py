@@ -11,10 +11,10 @@ logger = getLogger(__name__)
 def test_init_long_contest_number_dict():
     downloder = SubmittedCodesDownloader("USERNAME", "OUTPUT_DIR", 2021)
 
-    assert downloder.problem_id_to_number_dict["a"] == 1
-    assert downloder.problem_id_to_number_dict["z"] == 26
-    assert downloder.problem_id_to_number_dict["aa"] == 27
-    assert downloder.problem_id_to_number_dict["az"] == 52
+    assert downloder.problem_id_to_number_dict["a"] == "001"
+    assert downloder.problem_id_to_number_dict["z"] == "026"
+    assert downloder.problem_id_to_number_dict["aa"] == "027"
+    assert downloder.problem_id_to_number_dict["az"] == "052"
 
 
 @pytest.mark.github_actions
