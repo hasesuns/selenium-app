@@ -53,7 +53,7 @@ class SubmittedCodesDownloader:
             second_chr = chr(i % NUM_ALPHABETS + ord("a"))
             if first_chr == "`":
                 first_chr = ""
-            problem_id_to_number_dict[first_chr + second_chr] = i + 1
+            problem_id_to_number_dict[first_chr + second_chr] = f"{i + 1}".zfill(3)
         return problem_id_to_number_dict
 
     def get_submissions_info(self):
