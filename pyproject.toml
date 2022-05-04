@@ -6,7 +6,7 @@ authors = ["Akiyuki Hasegawa < hasesuns123@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-chromedriver-binary = "^94.0.4606"
+chromedriver-binary = "^101.0.4951"
 requests = "^2.26.0"
 selenium = "^4.0.0"
 webdriver-manager = "^3.5.1"
