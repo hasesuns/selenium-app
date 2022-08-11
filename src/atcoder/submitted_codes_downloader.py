@@ -125,8 +125,17 @@ class SubmittedCodesDownloader:
         if submission_info_by_problem["contest_id"] == "typical90":
             file_name = self.problem_id_to_number_dict[file_name]
 
+        used_lang = submission_info_by_problem["language"]
+        file_extension = ""
+        if "Py" in used_lang:
+            file_extension = "py"
+        elif "Rust" in used_lang:
+            file_extension = "rs"
+        elif "C++" in used_lang:
+            file_extension = "cpp"
+
         output_path = Path(
-            f"{self.output_dir}/{submission_info_by_problem['contest_id']}/{file_name}.py"
+            f"{self.output_dir}/{submission_info_by_problem['contest_id']}/{file_name}.{file_extension}"
         )
         return output_path
 
