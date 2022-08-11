@@ -41,6 +41,8 @@ def test_get_submission_url():
     }
 
     submission_url = downloder._get_submission_url(submission_info_by_problem)
-    ans_submission_url = "https://atcoder.jp/contests/sample_contest/submissions/1234567890"
+    ans_submission_url = (
+        "https://atcoder.jp/contests/sample_contest/submissions/1234567890"
+    )
 
     assert submission_url == ans_submission_url
